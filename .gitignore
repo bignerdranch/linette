@@ -1,0 +1,18 @@
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Gradle files
+.gradle/
+build/
+
+# Generated files
+bin/
+gen/
+
+# Local configurations
+local.properties
+
+.DS_Store
