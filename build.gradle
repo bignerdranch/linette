@@ -19,6 +19,7 @@ dependencies {
     compile 'com.android.tools.lint:lint-checks:24.3.1'
     testCompile 'junit:junit:4.11'
     testCompile 'org.assertj:assertj-core:3.0.0'
+    testCompile 'org.mockito:mockito-core:1.9.5'
     testCompile 'com.android.tools.lint:lint:24.3.1'
     testCompile 'com.android.tools.lint:lint-tests:24.3.1'
     testCompile 'com.android.tools:testutils:24.3.1'
@@ -30,7 +31,7 @@ jar {
 
     manifest {
         attributes 'Manifest-Version': 1.0
-        attributes("Lint-Registry": "com.bignerdranch.linette.CustomIssueRegistry")
+        attributes('Lint-Registry': 'com.bignerdranch.linette.CustomIssueRegistry')
     }
 }
 
@@ -46,5 +47,5 @@ defaultTasks 'assemble'
 
 task install(type: Copy) {
     from configurations.lintChecks
-    into System.getProperty("user.home") + '/.android/lint/'
+    into System.getProperty('user.home') + '/.android/lint/'
 }

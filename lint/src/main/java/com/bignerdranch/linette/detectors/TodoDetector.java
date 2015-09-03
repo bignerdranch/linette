@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Location;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
+import com.android.tools.lint.detector.api.TextFormat;
 
 import java.io.File;
 import java.util.EnumSet;
@@ -68,6 +69,7 @@ public class TodoDetector extends Detector implements Detector.JavaScanner {
 
     @Override
     public AstVisitor createJavaVisitor(@NonNull JavaContext context) {
+        context.report(ISSUE, Location.create(context.file), ISSUE.getBriefDescription(TextFormat.TEXT));
         String source = context.getContents();
         if (source == null) {
             return null;
@@ -75,7 +77,7 @@ public class TodoDetector extends Detector implements Detector.JavaScanner {
 
         for (int index = source.indexOf(TODO_MATCHER_STRING); index >= 0; index = source.indexOf(TODO_MATCHER_STRING, index + 1)) {
             Location location = Location.create(context.file, source, index, index + TODO_MATCHER_STRING.length());
-            context.report(ISSUE, location, "TODO comment found.");
+            context.report(ISSUE, location, ISSUE.getBriefDescription(TextFormat.TEXT));
         }
         return null;
     }

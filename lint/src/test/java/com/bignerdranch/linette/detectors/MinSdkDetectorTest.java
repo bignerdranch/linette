@@ -1,16 +1,13 @@
 package com.bignerdranch.linette.detectors;
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
+import com.bignerdranch.linette.AbstractDetectorTest;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import com.bignerdranch.linette.detectors.MinSdkDetector;
-
-public class MinSdkDetectorTest extends LintDetectorTest {
+public class MinSdkDetectorTest extends AbstractDetectorTest {
 
     @Override
     protected Detector getDetector() {
@@ -22,15 +19,7 @@ public class MinSdkDetectorTest extends LintDetectorTest {
         return Arrays.asList(MinSdkDetector.ISSUE);
     }
 
-    @Override
-    protected InputStream getTestResource(String relativePath, boolean expectExists) {
-        String path = relativePath; //$NON-NLS-1$
-        InputStream stream = MinSdkDetectorTest.class.getResourceAsStream(path);
-        if (!expectExists && stream == null) {
-            return null;
-        }
-        return stream;
-    }
+
 
     public void testShouldDetectNoAncientSdk() throws Exception {
         assertEquals(
@@ -41,7 +30,8 @@ public class MinSdkDetectorTest extends LintDetectorTest {
 
     public void testShouldDetectAncientSdk() throws Exception {
         assertEquals(
-                "Error: Ancient minSdkVersion detected [AncientMinSdk]\n" + "1 errors, 0 warnings\n",
+                "MinSdkDetectorTest_testShouldDetectAncientSdk: Warning: Supporting ancient Android versions [MinSdk]\n" +
+                        "0 errors, 1 warnings\n",
                 lintFiles("InvalidAndroidManifest.xml=>AndroidManifest.xml")
         );
     }

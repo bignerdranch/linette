@@ -15,16 +15,18 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class CustomIssueRegistry extends IssueRegistry {
 
+    private List<Issue> mIssues = Arrays.asList(
+            EnumDetector.ISSUE,
+            MinSdkDetector.ISSUE,
+            TodoDetector.ISSUE
+    );
+
     public CustomIssueRegistry() {
     }
 
     @Override
     public List<Issue> getIssues() {
-        return Arrays.asList(
-                EnumDetector.ISSUE,
-                MinSdkDetector.ISSUE,
-                TodoDetector.ISSUE
-        );
+        return mIssues;
     }
 
 }

@@ -1,8 +1,8 @@
 package com.bignerdranch.linette.detectors;
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
+import com.bignerdranch.linette.AbstractDetectorTest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.android.SdkConstants.DOT_JAVA;
 
-public class EnumDetectorTest extends LintDetectorTest {
+public class EnumDetectorTest extends AbstractDetectorTest {
 
     @Override
     protected Detector getDetector() {

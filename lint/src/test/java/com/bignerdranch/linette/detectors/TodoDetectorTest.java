@@ -1,8 +1,8 @@
 package com.bignerdranch.linette.detectors;
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
+import com.bignerdranch.linette.AbstractDetectorTest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.android.SdkConstants.DOT_JAVA;
 
-public class TodoDetectorTest extends LintDetectorTest {
+public class TodoDetectorTest extends AbstractDetectorTest {
 
     @Override
     protected Detector getDetector() {
@@ -35,12 +35,12 @@ public class TodoDetectorTest extends LintDetectorTest {
      * Test that a Java file with a to-do has a warning.
      */
     public void testEnumCase() throws Exception {
-        String expected = "EnumDetectorTest_testEnumCase: Warning: Avoid Using Enums [EnumDetector]\n0 errors, 1 warnings\n";
-        String result = lintProject(
-                java(DOT_JAVA,
-                     String.format("package com.example.lint; public class Pet { // TODO }")
-                )
+        TestFile testFile = java(DOT_JAVA,
+             String.format("package com.example.lint; public class Pet { // TODO }")
         );
+
+        String expected = "Cdddd";
+        String result = lintProject(testFile);
         assertEquals(expected, result);
     }
 
