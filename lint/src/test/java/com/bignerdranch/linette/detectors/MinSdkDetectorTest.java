@@ -2,6 +2,7 @@ package com.bignerdranch.linette.detectors;
 
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
+import com.android.tools.lint.detector.api.TextFormat;
 import com.bignerdranch.linette.AbstractDetectorTest;
 
 import java.util.Arrays;
@@ -19,19 +20,36 @@ public class MinSdkDetectorTest extends AbstractDetectorTest {
         return Arrays.asList(MinSdkDetector.ISSUE);
     }
 
+    @Override
+    protected String getTestResourceDirectory() {
+        return "minsdk";
+    }
 
-
-    public void testShouldDetectNoAncientSdk() throws Exception {
+    /**
+     * Test that a valid AndroidManifest.xml has no warnings.
+     */
+    public void testValidManifest() throws Exception {
         assertEquals(
-                "No warnings.",
+                NO_WARNINGS,
                 lintFiles("ValidAndroidManifest.xml=>AndroidManifest.xml")
         );
     }
 
-    public void testShouldDetectAncientSdk() throws Exception {
+    /**
+     * Test that an invalid AndroidManifest.xml has a warning.
+     */
+    public void testInvalidManifest() throws Exception {
+        String warningMessage = MinSdkDetectorTest.class.getSimpleName()
+                + "_"
+                + Thread.currentThread().getStackTrace()[1].getMethodName()
+                + ": Warning: "
+                + MinSdkDetector.ISSUE.getBriefDescription(TextFormat.TEXT)
+                + " ["
+                + MinSdkDetector.ISSUE.getId()
+                + "]\n"
+                + "0 errors, 1 warnings\n";
         assertEquals(
-                "MinSdkDetectorTest_testShouldDetectAncientSdk: Warning: Supporting ancient Android versions [MinSdk]\n" +
-                        "0 errors, 1 warnings\n",
+                warningMessage,
                 lintFiles("InvalidAndroidManifest.xml=>AndroidManifest.xml")
         );
     }

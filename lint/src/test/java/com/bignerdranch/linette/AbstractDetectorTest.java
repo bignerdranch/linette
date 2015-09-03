@@ -14,31 +14,25 @@ import java.security.CodeSource;
 
 public abstract class AbstractDetectorTest extends LintDetectorTest {
 
+    protected static final String PATH_TEST_RESOURCES = "/lint/src/test/resources/";
+    protected static final String NO_WARNINGS = "No warnings.";
+
+    protected abstract String getTestResourceDirectory();
+
     @Override
     protected InputStream getTestResource(String relativePath, boolean expectExists) {
-        String path = File.separator + relativePath; //$NON-NLS-1$
-        InputStream stream = AbstractDetectorTest.class.getResourceAsStream(path);
-        if (stream == null) {
-            File root = getTestDataRootDir();
-            assertNotNull(root);
-            String pkg = AbstractDetectorTest.class.getName();
-            pkg = pkg.substring(0, pkg.lastIndexOf('.'));
-            File f = new File(root, "lint/src/test/resources/".replace('/', File.separatorChar) + File.separatorChar + path);
-            if (f.exists()) {
-                try {
-                    return new BufferedInputStream(new FileInputStream(f));
-                } catch (FileNotFoundException e) {
-                    stream = null;
-                    if (expectExists) {
-                        fail("Could not find file " + relativePath);
-                    }
+        String path = (PATH_TEST_RESOURCES + getTestResourceDirectory() + File.separatorChar + relativePath).replace('/', File.separatorChar);
+        File file = new File(getTestDataRootDir(), path);
+        if (file.exists()) {
+            try {
+                return new BufferedInputStream(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+                if (expectExists) {
+                    fail("Could not find file " + relativePath);
                 }
             }
         }
-        if (!expectExists && stream == null) {
-            return null;
-        }
-        return stream;
+        return null;
     }
 
     private File getTestDataRootDir() {

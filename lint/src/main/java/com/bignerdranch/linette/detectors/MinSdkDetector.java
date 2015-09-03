@@ -28,8 +28,8 @@ public class MinSdkDetector extends Detector {
     );
 
     private static final String ISSUE_ID = "MinSdk";
-    private static final String ISSUE_DESCRIPTION = "Supporting ancient Android versions";
-    private static final String ISSUE_EXPLANATION = "minSdkVersion should be at least " + SUGGESTED_MIN_SDK_VERSION;
+    private static final String ISSUE_DESCRIPTION = "Low MinSdk Choice";
+    private static final String ISSUE_EXPLANATION = "The minSdkVersion should be at least " + SUGGESTED_MIN_SDK_VERSION;
     private static final Category ISSUE_CATEGORY = Category.CORRECTNESS;
     private static final int ISSUE_PRIORITY = 8;
     private static final Severity ISSUE_SEVERITY = Severity.WARNING;

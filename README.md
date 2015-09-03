@@ -8,9 +8,7 @@ Custom lint checks for Android development.
 Setup
 ------------
 
-`./gradlew clean build`
-
-`gradle install`
+`./gradlew clean build test install`
 
 Verify
 ------------

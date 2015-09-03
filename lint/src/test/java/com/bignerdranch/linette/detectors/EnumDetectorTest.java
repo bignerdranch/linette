@@ -2,13 +2,11 @@ package com.bignerdranch.linette.detectors;
 
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
+import com.android.tools.lint.detector.api.TextFormat;
 import com.bignerdranch.linette.AbstractDetectorTest;
 
 import java.util.Arrays;
 import java.util.List;
-
-
-import static com.android.SdkConstants.DOT_JAVA;
 
 public class EnumDetectorTest extends AbstractDetectorTest {
 
@@ -22,26 +20,38 @@ public class EnumDetectorTest extends AbstractDetectorTest {
         return Arrays.asList(EnumDetector.ISSUE);
     }
 
-    /**
-     * Test that an empty Java file has no warnings.
-     */
-    public void testEmptyCase() throws Exception {
-        String expected = "No warnings.";
-        String result = lintProject(java(DOT_JAVA, ""));
-        assertEquals(expected, result);
+    @Override
+    protected String getTestResourceDirectory() {
+        return "enum";
     }
 
     /**
-     * Test that an enum Java file has a warning.
+     * Test that an empty java file has no warnings.
+     */
+    public void testEmptyCase() throws Exception {
+        String file = "EmptyTestCase.java";
+        assertEquals(
+                NO_WARNINGS,
+                lintFiles(file)
+        );
+    }
+
+    /**
+     * Test that a java file with an enum has a warning.
      */
     public void testEnumCase() throws Exception {
-        String expected = "EnumDetectorTest_testEnumCase: Warning: Avoid Using Enums [EnumDetector]\n0 errors, 1 warnings\n";
-        String result = lintProject(
-                java(DOT_JAVA,
-                     String.format("package com.example.lint; public enum Pet { CAT, DOG, TURTLE }")
-                )
+        String file = "EnumTestCase.java";
+        String warningMessage = file
+                + ": Warning: "
+                + EnumDetector.ISSUE.getBriefDescription(TextFormat.TEXT)
+                + " ["
+                + EnumDetector.ISSUE.getId()
+                + "]\n"
+                + "0 errors, 1 warnings\n";
+        assertEquals(
+                warningMessage,
+                lintFiles(file)
         );
-        assertEquals(expected, result);
     }
 
 }

@@ -69,14 +69,17 @@ public class TodoDetector extends Detector implements Detector.JavaScanner {
 
     @Override
     public AstVisitor createJavaVisitor(@NonNull JavaContext context) {
-        context.report(ISSUE, Location.create(context.file), ISSUE.getBriefDescription(TextFormat.TEXT));
         String source = context.getContents();
+
+        // Check validity of source
         if (source == null) {
             return null;
         }
 
-        for (int index = source.indexOf(TODO_MATCHER_STRING); index >= 0; index = source.indexOf(TODO_MATCHER_STRING, index + 1)) {
-            Location location = Location.create(context.file, source, index, index + TODO_MATCHER_STRING.length());
+        // Check for uses of to-dos
+        int index = source.indexOf(TODO_MATCHER_STRING);
+        for (int i = index; i >= 0; i = source.indexOf(TODO_MATCHER_STRING, i + 1)) {
+            Location location = Location.create(context.file, source, i, i + TODO_MATCHER_STRING.length());
             context.report(ISSUE, location, ISSUE.getBriefDescription(TextFormat.TEXT));
         }
         return null;

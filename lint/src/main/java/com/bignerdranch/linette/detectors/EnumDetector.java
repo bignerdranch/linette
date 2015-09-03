@@ -37,7 +37,7 @@ public class EnumDetector extends Detector implements Detector.JavaScanner {
             DETECTOR_SCOPE
     );
 
-    private static final String ISSUE_ID = "enum";
+    private static final String ISSUE_ID = "Enum";
     private static final String ISSUE_DESCRIPTION = "Avoid Using Enums";
     private static final String ISSUE_EXPLANATION = "No real Android programmer should ever use enums. EVER.";
     private static final Category ISSUE_CATEGORY = Category.PERFORMANCE;
@@ -90,18 +90,6 @@ public class EnumDetector extends Detector implements Detector.JavaScanner {
 
         public EnumChecker(JavaContext context) {
             mContext = context;
-        }
-
-        @Override
-        public boolean visitEnumTypeBody(EnumTypeBody node) {
-            mContext.report(ISSUE, Location.create(mContext.file), ISSUE.getBriefDescription(TextFormat.TEXT));
-            return super.visitEnumTypeBody(node);
-        }
-
-        @Override
-        public boolean visitEnumConstant(EnumConstant node) {
-            mContext.report(ISSUE, Location.create(mContext.file), ISSUE.getBriefDescription(TextFormat.TEXT));
-            return super.visitEnumConstant(node);
         }
 
         @Override
