@@ -3,21 +3,40 @@ Linette
 
 [![Build Status](https://travis-ci.org/bignerdranch/linette.svg?branch=master)](https://travis-ci.org/bignerdranch/linette)
 
-Custom lint checks for Android development.
+Custom Lint checks for Android development.
 
 Setup
 ------------
 
+Check out the repository to your local machine via:
+
+`git clone https://github.com/bignerdranch/linette.git`
+
+Then, from a terminal, run the following command in the Linette project:
+
 `./gradlew clean build test install`
+
+Now the custom Lint checks have been built, packaged, and installed to your `~/.android/lint` folder.
 
 Verify
 ------------
+To check that the custom Lint checks are now available, run the following commands:
 
-`lint --show EnumDetector`
+`lint --show <issue-id>`
 
-`lint --show MinSdkDetector`
+For example:
 
-`lint --show TodoDetector`
+`lint --show Enum`
+
+`lint --show MinSdk`
+
+`lint --show Todo`
+
+And to actually run the Lint checks, try the following command from a project of your choice:
+
+`./gradlew lint`
+
+Alternatively, you can just use Android Studio's `Analyze->Inspect Code...` menu option.
 
 License
 -------
