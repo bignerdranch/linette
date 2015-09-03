@@ -35,8 +35,8 @@ public class TodoDetector extends Detector implements Detector.JavaScanner {
     );
 
     private static final String ISSUE_ID = "Todo";
-    private static final String ISSUE_DESCRIPTION = "Code contains a TODO comment";
-    private static final String ISSUE_EXPLANATION = "Using the comment `// TODO` can be helpful during development but should not be left in shipped code. Consider making this a Github Issue if you need to keep track of your todo's";
+    private static final String ISSUE_DESCRIPTION = "Todo Comments Detected";
+    private static final String ISSUE_EXPLANATION = "Using the comment `// TODO` can be helpful during development, but should not be left in shipped code. Consider making this a Github Issue if you need to keep track of your todo's";
     private static final Category ISSUE_CATEGORY = Category.CORRECTNESS;
     private static final int ISSUE_PRIORITY = 8;
     private static final Severity ISSUE_SEVERITY = Severity.WARNING;
