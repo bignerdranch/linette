@@ -3,7 +3,7 @@ Linette
 
 [![Build Status](https://travis-ci.org/bignerdranch/linette.svg?branch=master)](https://travis-ci.org/bignerdranch/linette)
 
-Custom Lint checks for Android development.
+Custom Lint checks for Android development. The name Linette comes from the etymology of the word ["lint"](https://www.google.com/search?q=etymology+lint).
 
 Setup
 ------------
