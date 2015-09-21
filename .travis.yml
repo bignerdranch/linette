@@ -13,5 +13,4 @@ notifications:
     email: false
 
 script:
-    - ./gradlew clean build
-    - ./gradlew clean test
+    - ./gradlew clean build test

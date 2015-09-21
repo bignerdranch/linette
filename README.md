@@ -18,6 +18,12 @@ Then, from a terminal, run the following command in the Linette project:
 
 Now the custom Lint checks have been built, packaged, and installed to your `~/.android/lint` folder.
 
+If you don't want the custom Lint checks globally available, instead preferring a project-by-project basis, then there is a second option with the following script:
+
+`./gradlew aarWrapper:assemble`
+
+This wraps the JAR file and generates an aar library file in `aarWrapper/build/outputs/aar/` that may be included as a normal dependency in any Android project - either by copying it to the `libs` folder of an Android application project, adding it to a centralized dependency repo, or any other method for adding a library to a project. Lint will pick up on the inner JAR inside the dependency, thus adding the custom Lint checks to the project. 
+
 Verify
 ------------
 To check that the custom Lint checks are now available, run the following commands:
