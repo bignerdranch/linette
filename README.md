@@ -44,6 +44,8 @@ And to actually run the Lint checks, try the following command from a project of
 
 Alternatively, you can just use Android Studio's `Analyze->Inspect Code...` menu option.
 
+Enjoy!
+
 License
 -------
 
